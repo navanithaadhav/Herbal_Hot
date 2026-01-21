@@ -11,6 +11,7 @@ const ForgotPasswordPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    // Submit handler for forgot password
     const submitHandler = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
