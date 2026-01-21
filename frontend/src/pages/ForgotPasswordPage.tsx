@@ -18,7 +18,15 @@ const ForgotPasswordPage: React.FC = () => {
             toast.success('OTP sent to your email');
             navigate(`/reset-password?email=${encodeURIComponent(email)}`);
         } catch (error: unknown) {
-            const errorMessage = error instanceof Error ? (error as any).response?.data?.message || error.message : 'Failed to send OTP';
+            let errorMessage = 'Failed to send OTP';
+            if (typeof error === 'object' && error !== null && 'response' in error) {
+                const err = error as { response?: { data?: { message?: string } } };
+                if (err.response?.data?.message) {
+                    errorMessage = err.response.data.message;
+                }
+            } else if (error instanceof Error) {
+                errorMessage = error.message;
+            }
             toast.error(errorMessage);
         } finally {
             setLoading(false);
