@@ -59,12 +59,7 @@ const ProductDetailsPage: React.FC = () => {
     const { userInfo } = useAuthStore();
     const [selectedImage, setSelectedImage] = useState('');
 
-    // Reset selected image when product changes: handled by key={id} in parent or manual reset
-    useEffect(() => {
-        // eslint-disable-next-line
-        setSelectedImage('');
-    }, [id]);
-
+    // Reset selected image and fetch data when id changes
     const addToCart = useCartStore((state) => state.addToCart);
     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
 
@@ -93,6 +88,7 @@ const ProductDetailsPage: React.FC = () => {
     };
 
     useEffect(() => {
+        if (selectedImage) setSelectedImage('');
         const fetchProductData = async () => {
             setLoading(true);
             try {
@@ -116,6 +112,7 @@ const ProductDetailsPage: React.FC = () => {
 
         fetchProductData();
         window.scrollTo(0, 0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     const handleAddToCart = () => {

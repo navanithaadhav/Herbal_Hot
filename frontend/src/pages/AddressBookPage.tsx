@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
@@ -15,7 +15,8 @@ interface Address {
 
 const AddressBookPage: React.FC = () => {
     const { userInfo, setCredentials } = useAuthStore();
-    const [addresses, setAddresses] = useState<Address[]>(userInfo?.addresses || []);
+    // Derived state from userInfo
+    const addresses = userInfo?.addresses || [];
     const [showForm, setShowForm] = useState(false);
     const [newAddress, setNewAddress] = useState<Address>({
         street: '',
@@ -25,13 +26,6 @@ const AddressBookPage: React.FC = () => {
         country: '',
         mode: 'home'
     });
-
-    useEffect(() => {
-        if (userInfo?.addresses) {
-            // eslint-disable-next-line
-            setAddresses(userInfo.addresses);
-        }
-    }, [userInfo]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setNewAddress({ ...newAddress, [e.target.name]: e.target.value });
@@ -47,7 +41,6 @@ const AddressBookPage: React.FC = () => {
                 addresses: updatedAddresses
             });
             setCredentials(data);
-            setAddresses(updatedAddresses);
             setShowForm(false);
             setNewAddress({ street: '', city: '', state: '', zip: '', country: '', mode: 'home' });
             toast.success('Address added successfully');
@@ -66,7 +59,6 @@ const AddressBookPage: React.FC = () => {
                     addresses: updatedAddresses
                 });
                 setCredentials(data);
-                setAddresses(updatedAddresses);
                 toast.success('Address deleted successfully');
             } catch {
                 toast.error('Failed to delete address');

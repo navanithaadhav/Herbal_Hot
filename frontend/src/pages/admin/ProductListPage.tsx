@@ -18,21 +18,23 @@ const AdminProductListPage: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const { userInfo } = useAuthStore();
 
-    const fetchProducts = React.useCallback(async () => {
-        try {
-            const { data } = await api.get('/products');
-            setProducts(data);
-            setLoading(false);
-        } catch {
-            toast.error('Failed to fetch products');
-            setLoading(false);
-        }
-    }, [])
+    const [refreshKey, setRefreshKey] = useState(0);
 
     useEffect(() => {
-        // eslint-disable-next-line
+        const fetchProducts = async () => {
+            try {
+                const { data } = await api.get('/products');
+                setProducts(data);
+                setLoading(false);
+            } catch {
+                toast.error('Failed to fetch products');
+                setLoading(false);
+            }
+        };
         fetchProducts();
-    }, [fetchProducts]);
+    }, [refreshKey]);
+
+    const refreshProducts = () => setRefreshKey((prev) => prev + 1);
 
     const deleteHandler = async (id: string) => {
         if (window.confirm('Are you sure?')) {
@@ -42,7 +44,7 @@ const AdminProductListPage: React.FC = () => {
                 };
                 await api.delete(`/products/${id}`, config);
                 toast.success('Product deleted');
-                fetchProducts();
+                refreshProducts();
             } catch {
                 toast.error('Failed to delete product');
             }
@@ -56,7 +58,7 @@ const AdminProductListPage: React.FC = () => {
             };
             await api.post(`/products`, {}, config);
             toast.success('Sample product created');
-            fetchProducts();
+            refreshProducts();
         } catch (err: unknown) {
             console.error('Create product error:', err);
             const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || (err as Error).message || 'Failed to create product';

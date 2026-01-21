@@ -30,7 +30,6 @@ interface Order {
     createdAt: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SortIcon = ({ column, sortConfig }: { column: string, sortConfig: { key: string; direction: string } }) => {
     if (sortConfig.key !== column) return <ArrowUpDown size={14} className="ml-1 text-gray-400" />;
     return sortConfig.direction === 'asc'

@@ -28,23 +28,25 @@ const ReviewListPage: React.FC = () => {
     const [error, setError] = useState('');
     const { userInfo } = useAuthStore();
 
-    const fetchData = React.useCallback(async () => {
-        try {
-            setLoading(true);
-            const { data } = await api.get('/products');
-            setProducts(data);
-            setLoading(false);
-        } catch (err: unknown) {
-            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || (err as Error).message || 'Failed to fetch reviews';
-            setError(errorMessage);
-            setLoading(false);
-        }
-    }, [])
+    const [refreshKey, setRefreshKey] = useState(0);
 
     useEffect(() => {
-        // eslint-disable-next-line
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const { data } = await api.get('/products');
+                setProducts(data);
+                setLoading(false);
+            } catch (err: unknown) {
+                const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || (err as Error).message || 'Failed to fetch reviews';
+                setError(errorMessage);
+                setLoading(false);
+            }
+        };
         fetchData();
-    }, [fetchData]);
+    }, [refreshKey]);
+
+    const refreshData = () => setRefreshKey((prev) => prev + 1);
 
     const deleteHandler = async (productId: string, reviewId: string) => {
         if (window.confirm('Are you sure you want to delete this review?')) {
@@ -56,7 +58,7 @@ const ReviewListPage: React.FC = () => {
                 };
                 await api.delete(`/products/${productId}/reviews/${reviewId}`, config);
                 toast.success('Review deleted successfully');
-                fetchData(); // Refresh data
+                refreshData(); // Refresh data
             } catch (err: unknown) {
                 const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Error deleting review';
                 toast.error(errorMessage);
