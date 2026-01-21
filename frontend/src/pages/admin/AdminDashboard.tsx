@@ -24,6 +24,7 @@ interface TopProductData {
     _id: string;
     name: string;
     totalSold: number;
+    [key: string]: string | number | undefined;
 }
 
 interface Order {

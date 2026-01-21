@@ -10,7 +10,7 @@ import { Loader2 } from 'lucide-react';
 declare global {
     interface Window {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        Razorpay: any;
+        Razorpay: new (options: any) => any;
     }
 }
 
@@ -87,8 +87,7 @@ const PlaceOrderPage: React.FC = () => {
                     name: 'Masala Store',
                     description: 'Order Payment',
                     order_id: data.razorpayOrderId,
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    handler: async function (response: any) {
+                    handler: async function (response: { razorpay_payment_id: string; razorpay_order_id: string; razorpay_signature: string }) {
                         try {
                             const paymentResult = {
                                 id: response.razorpay_payment_id,
@@ -133,9 +132,9 @@ const PlaceOrderPage: React.FC = () => {
                 setLoading(false);
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Failed to place order');
+        } catch (error: unknown) {
+            const errorMessage = (error as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to place order';
+            toast.error(errorMessage);
             setLoading(false);
         }
     };

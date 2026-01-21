@@ -57,10 +57,9 @@ const AdminProductListPage: React.FC = () => {
             await api.post(`/products`, {}, config);
             toast.success('Sample product created');
             fetchProducts();
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Create product error:', err);
-            const message = err.response?.data?.message || err.message || 'Failed to create product';
+            const message = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || (err as Error).message || 'Failed to create product';
             toast.error(message);
         }
     };

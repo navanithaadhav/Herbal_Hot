@@ -85,9 +85,9 @@ const ProductDetailsPage: React.FC = () => {
             const { data } = await api.get(`/products/${id}`);
             setProduct(data);
             setSubmitLoading(false);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Failed to submit review');
+        } catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to submit review';
+            toast.error(errorMessage);
             setSubmitLoading(false);
         }
     };

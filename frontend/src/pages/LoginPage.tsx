@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore';
 import api from '../api/axios';
 import toast from 'react-hot-toast';
 import { Loader2, Mail, Lock, ArrowRight } from 'lucide-react';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, type CredentialResponse } from '@react-oauth/google';
 import heroBg from '../assets/images/background.jpg'; // Using existing asset
 
 const LoginPage: React.FC = () => {
@@ -33,16 +33,15 @@ const LoginPage: React.FC = () => {
             setCredentials(data);
             toast.success('Welcome back!');
             navigate(redirect);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Invalid email or password');
+        } catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Invalid email or password';
+            toast.error(errorMessage);
         } finally {
             setLoading(false);
         }
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleGoogleLogin = async (credentialResponse: any) => {
+    const handleGoogleLogin = async (credentialResponse: CredentialResponse) => {
         try {
             setLoading(true);
             const { data } = await api.post('/users/google-login', {
@@ -51,8 +50,7 @@ const LoginPage: React.FC = () => {
             setCredentials(data);
             toast.success('Welcome back!');
             navigate(redirect);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error(err);
             toast.error('Google Loign Failed');
         } finally {

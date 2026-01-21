@@ -27,10 +27,9 @@ const UserListPage: React.FC = () => {
                 console.log('Users fetched:', data);
                 setUsers(data);
                 setLoading(false);
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error('Fetch users error:', err);
-                const msg = err.response?.data?.message || err.message || 'Failed to fetch users';
+                const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || (err as Error).message || 'Failed to fetch users';
                 toast.error(msg);
                 setLoading(false);
             }

@@ -34,9 +34,9 @@ const ReviewListPage: React.FC = () => {
             const { data } = await api.get('/products');
             setProducts(data);
             setLoading(false);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            setError(err.response?.data?.message || err.message);
+        } catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || (err as Error).message || 'Failed to fetch reviews';
+            setError(errorMessage);
             setLoading(false);
         }
     }, [])
@@ -57,9 +57,9 @@ const ReviewListPage: React.FC = () => {
                 await api.delete(`/products/${productId}/reviews/${reviewId}`, config);
                 toast.success('Review deleted successfully');
                 fetchData(); // Refresh data
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (err: any) {
-                toast.error(err.response?.data?.message || 'Error deleting review');
+            } catch (err: unknown) {
+                const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Error deleting review';
+                toast.error(errorMessage);
             }
         }
     };

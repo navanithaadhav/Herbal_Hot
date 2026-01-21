@@ -92,9 +92,9 @@ const ProfilePage: React.FC = () => {
             toast.success('Profile updated successfully');
             setPassword('');
             setConfirmPassword('');
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Update failed');
+        } catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Update failed';
+            toast.error(errorMessage);
         } finally {
             setUpdating(false);
         }

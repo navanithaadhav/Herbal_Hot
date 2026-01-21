@@ -12,8 +12,7 @@ interface TopProduct {
     _id: string;
     name: string;
     totalSold: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
+    [key: string]: string | number | undefined;
 }
 
 interface TopProductsChartProps {

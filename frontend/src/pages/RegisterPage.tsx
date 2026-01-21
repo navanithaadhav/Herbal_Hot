@@ -44,9 +44,9 @@ const RegisterPage: React.FC = () => {
                 navigate(`/verify-email?email=${encodeURIComponent(email)}`);
             }
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        catch (err: any) {
-            toast.error(err.response?.data?.message || 'Registration failed');
+        catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Registration failed';
+            toast.error(errorMessage);
         } finally {
             setLoading(false);
         }

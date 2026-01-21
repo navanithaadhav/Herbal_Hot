@@ -19,8 +19,13 @@ interface Product {
     brand?: string;
     numReviews?: number;
     rating?: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    reviews?: any[];
+    reviews?: {
+        _id: string;
+        name: string;
+        rating: number;
+        comment: string;
+        createdAt: string;
+    }[];
 }
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {

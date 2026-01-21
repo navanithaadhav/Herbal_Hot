@@ -42,10 +42,9 @@ const ProductEditPage: React.FC = () => {
                 setUploading(false);
                 toast.success('Image uploaded successfully');
                 toast.success('Image uploaded successfully');
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            } catch (error: any) {
+            } catch (error: unknown) {
                 console.error('Upload error details:', error);
-                const errorMessage = error.response?.data?.message || error.message || 'Image upload failed';
+                const errorMessage = (error as { response?: { data?: { message?: string } } })?.response?.data?.message || (error as Error).message || 'Image upload failed';
                 toast.error(`Upload Error: ${errorMessage}`);
                 setUploading(false);
             }
@@ -102,9 +101,9 @@ const ProductEditPage: React.FC = () => {
 
             toast.success('Product updated successfully');
             navigate('/admin/productlist');
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (err: any) {
-            toast.error(err.response?.data?.message || 'Failed to update product');
+        } catch (err: unknown) {
+            const errorMessage = (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Failed to update product';
+            toast.error(errorMessage);
         } finally {
             setLoadingUpdate(false);
         }
