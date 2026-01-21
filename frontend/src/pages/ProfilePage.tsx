@@ -7,15 +7,25 @@ import api from '../api/axios';
 import { Loader2, Package, User, LogOut, Settings } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+interface OrderItem {
+    name: string;
+    qty: number;
+    image: string;
+    price: number;
+    product: string;
+}
+
 interface Order {
     _id: string;
     createdAt: string;
     totalPrice: number;
     isPaid: boolean;
     isDelivered: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    orderItems: any[];
+
+    orderItems: OrderItem[];
 }
+
+
 
 const ProfilePage: React.FC = () => {
     const { userInfo, logout, setCredentials } = useAuthStore();
@@ -46,8 +56,8 @@ const ProfilePage: React.FC = () => {
                     };
                     const { data } = await api.get('/orders/myorders', config);
                     setOrders(data);
-                } catch (err) {
-                    console.error('Fetch orders error:', err);
+                } catch {
+
                     toast.error('Failed to fetch orders');
                 } finally {
                     setLoadingOrders(false);
