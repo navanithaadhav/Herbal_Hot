@@ -19,6 +19,7 @@ interface Product {
     brand?: string;
     numReviews?: number;
     rating?: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     reviews?: any[];
 }
 

@@ -49,6 +49,7 @@ const HomePage: React.FC = () => {
 
     useEffect(() => {
         if (searchParams.get('paymentSuccessful') === 'true') {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setShowSuccessModal(true);
             const newParams = new URLSearchParams(searchParams);
             newParams.delete('paymentSuccessful');

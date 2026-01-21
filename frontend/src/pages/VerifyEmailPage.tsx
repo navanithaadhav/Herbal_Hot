@@ -50,6 +50,7 @@ const VerifyEmailPage: React.FC = () => {
             setCredentials(data);
             toast.success('Email verified successfully');
             navigate('/');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || 'Verification failed');
         } finally {

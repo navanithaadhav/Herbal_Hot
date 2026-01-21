@@ -56,6 +56,7 @@ const OrderDetailsPage: React.FC = () => {
                 };
                 const { data } = await api.get(`/orders/${id}`, config);
                 setOrder(data);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (err: any) {
                 toast.error(err.response?.data?.message || 'Failed to fetch order');
             } finally {
@@ -80,6 +81,7 @@ const OrderDetailsPage: React.FC = () => {
             setLoadingDeliver(false);
             toast.success('Order marked as delivered');
             window.location.reload();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || err.message);
             setLoadingDeliver(false);
@@ -98,6 +100,7 @@ const OrderDetailsPage: React.FC = () => {
             setLoadingShipped(false);
             toast.success('Order marked as shipped');
             window.location.reload();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || err.message);
             setLoadingShipped(false);

@@ -11,7 +11,7 @@ interface DashboardStats {
     totalProducts: number;
     totalOrders: number;
     totalRevenue: number;
-    topProducts: any[];
+    topProducts: TopProductData[];
 }
 
 interface SalesData {

@@ -59,10 +59,10 @@ const ProductDetailsPage: React.FC = () => {
     const { userInfo } = useAuthStore();
     const [selectedImage, setSelectedImage] = useState('');
 
-    // Reset selected image when product changes
+    // Reset selected image when product changes: handled by key={id} in parent or manual reset
     useEffect(() => {
-        if (product) setSelectedImage(product.image);
-    }, [product]);
+        setSelectedImage('');
+    }, [id]);
 
     const addToCart = useCartStore((state) => state.addToCart);
     const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();

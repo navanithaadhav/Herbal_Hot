@@ -5,13 +5,21 @@ import api from '../api/axios';
 import { Loader2, Package } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+interface OrderItem {
+    name: string;
+    qty: number;
+    image: string;
+    price: number;
+    product: string;
+}
+
 interface Order {
     _id: string;
     createdAt: string;
     totalPrice: number;
     isPaid: boolean;
     isDelivered: boolean;
-    orderItems: any[];
+    orderItems: OrderItem[];
 }
 
 const OrdersPage: React.FC = () => {
@@ -35,7 +43,7 @@ const OrdersPage: React.FC = () => {
                 };
                 const { data } = await api.get('/orders/myorders', config);
                 setOrders(data);
-            } catch (err) {
+            } catch (_err) {
                 toast.error('Failed to load orders');
             } finally {
                 setLoading(false);
@@ -82,7 +90,7 @@ const OrdersPage: React.FC = () => {
 
                                 <div className="border-t border-gray-100 pt-4 flex flex-col md:flex-row justify-between md:items-center gap-4">
                                     <div className="flex items-center gap-4">
-                                        {order.orderItems.slice(0, 3).map((item: any, idx: number) => (
+                                        {order.orderItems.slice(0, 3).map((item, idx) => (
                                             <div key={idx} className="h-16 w-16 bg-gray-100 rounded-md overflow-hidden relative">
                                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                                 <span className="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">{item.qty}x</span>

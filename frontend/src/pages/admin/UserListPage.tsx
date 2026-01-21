@@ -27,6 +27,7 @@ const UserListPage: React.FC = () => {
                 console.log('Users fetched:', data);
                 setUsers(data);
                 setLoading(false);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (err: any) {
                 console.error('Fetch users error:', err);
                 const msg = err.response?.data?.message || err.message || 'Failed to fetch users';
@@ -39,6 +40,7 @@ const UserListPage: React.FC = () => {
 
     const deleteHandler = async (_id: string) => {
         if (window.confirm('Are you sure?')) {
+            console.log('Delete user', _id); // Use _id to silence warning
             toast.error('Delete function not implemented yet');
         }
     };

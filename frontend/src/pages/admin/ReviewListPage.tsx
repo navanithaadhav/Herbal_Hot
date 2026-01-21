@@ -28,21 +28,22 @@ const ReviewListPage: React.FC = () => {
     const [error, setError] = useState('');
     const { userInfo } = useAuthStore();
 
-    const fetchData = async () => {
+    const fetchData = React.useCallback(async () => {
         try {
             setLoading(true);
             const { data } = await api.get('/products');
             setProducts(data);
             setLoading(false);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             setError(err.response?.data?.message || err.message);
             setLoading(false);
         }
-    };
+    }, [])
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData]);
 
     const deleteHandler = async (productId: string, reviewId: string) => {
         if (window.confirm('Are you sure you want to delete this review?')) {
@@ -55,6 +56,7 @@ const ReviewListPage: React.FC = () => {
                 await api.delete(`/products/${productId}/reviews/${reviewId}`, config);
                 toast.success('Review deleted successfully');
                 fetchData(); // Refresh data
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (err: any) {
                 toast.error(err.response?.data?.message || 'Error deleting review');
             }

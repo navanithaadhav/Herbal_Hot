@@ -30,6 +30,13 @@ interface Order {
     createdAt: string;
 }
 
+const SortIcon = ({ column, sortConfig }: { column: string, sortConfig: any }) => {
+    if (sortConfig.key !== column) return <ArrowUpDown size={14} className="ml-1 text-gray-400" />;
+    return sortConfig.direction === 'asc'
+        ? <ArrowUp size={14} className="ml-1 text-indigo-600" />
+        : <ArrowDown size={14} className="ml-1 text-indigo-600" />;
+};
+
 const OrderListPage: React.FC = () => {
     const navigate = useNavigate();
     const [orders, setOrders] = useState<Order[]>([]);
@@ -132,12 +139,7 @@ const OrderListPage: React.FC = () => {
         return result;
     }, [orders, searchTerm, statusFilter, sortConfig]);
 
-    const SortIcon = ({ column }: { column: string }) => {
-        if (sortConfig.key !== column) return <ArrowUpDown size={14} className="ml-1 text-gray-400" />;
-        return sortConfig.direction === 'asc'
-            ? <ArrowUp size={14} className="ml-1 text-indigo-600" />
-            : <ArrowDown size={14} className="ml-1 text-indigo-600" />;
-    };
+
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -193,13 +195,13 @@ const OrderListPage: React.FC = () => {
                                         onClick={() => handleSort('_id')}
                                         className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors group"
                                     >
-                                        <div className="flex items-center">ID <SortIcon column="_id" /></div>
+                                        <div className="flex items-center">ID <SortIcon column="_id" sortConfig={sortConfig} /></div>
                                     </th>
                                     <th
                                         onClick={() => handleSort('user')}
                                         className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                                     >
-                                        <div className="flex items-center">Customer <SortIcon column="user" /></div>
+                                        <div className="flex items-center">Customer <SortIcon column="user" sortConfig={sortConfig} /></div>
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                         Amount
@@ -208,13 +210,13 @@ const OrderListPage: React.FC = () => {
                                         onClick={() => handleSort('createdAt')}
                                         className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                                     >
-                                        <div className="flex items-center">Date <SortIcon column="createdAt" /></div>
+                                        <div className="flex items-center">Date <SortIcon column="createdAt" sortConfig={sortConfig} /></div>
                                     </th>
                                     <th
                                         onClick={() => handleSort('totalPrice')}
                                         className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors"
                                     >
-                                        <div className="flex items-center">Total <SortIcon column="totalPrice" /></div>
+                                        <div className="flex items-center">Total <SortIcon column="totalPrice" sortConfig={sortConfig} /></div>
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                         Status

@@ -6,12 +6,19 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 
+interface Product {
+    _id: string;
+    name: string;
+    price: number;
+    category: string;
+}
+
 const AdminProductListPage: React.FC = () => {
-    const [products, setProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const { userInfo } = useAuthStore();
 
-    const fetchProducts = async () => {
+    const fetchProducts = React.useCallback(async () => {
         try {
             const { data } = await api.get('/products');
             setProducts(data);
@@ -20,11 +27,11 @@ const AdminProductListPage: React.FC = () => {
             toast.error('Failed to fetch products');
             setLoading(false);
         }
-    };
+    }, [])
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [fetchProducts]);
 
     const deleteHandler = async (id: string) => {
         if (window.confirm('Are you sure?')) {

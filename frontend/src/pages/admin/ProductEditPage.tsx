@@ -41,6 +41,8 @@ const ProductEditPage: React.FC = () => {
                 setImages((prev) => [...prev, data.image]); // Append to gallery
                 setUploading(false);
                 toast.success('Image uploaded successfully');
+                toast.success('Image uploaded successfully');
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
             } catch (error: any) {
                 console.error('Upload error details:', error);
                 const errorMessage = error.response?.data?.message || error.message || 'Image upload failed';
@@ -100,6 +102,7 @@ const ProductEditPage: React.FC = () => {
 
             toast.success('Product updated successfully');
             navigate('/admin/productlist');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || 'Failed to update product');
         } finally {

@@ -36,6 +36,7 @@ const ResetPasswordPage: React.FC = () => {
             await api.put('/users/reset-password', { email, otp, password });
             toast.success('Password reset successful! Please login.');
             navigate('/login');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || 'Password reset failed');
         } finally {

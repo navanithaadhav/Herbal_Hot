@@ -5,11 +5,20 @@ import { useWishlistStore } from '../store/wishlistStore';
 import { useCartStore } from '../store/cartStore';
 import toast from 'react-hot-toast';
 
+interface WishlistItem {
+    _id: string;
+    name: string;
+    image: string;
+    price: number;
+    countInStock?: number;
+    category: string;
+}
+
 const WishlistPage: React.FC = () => {
     const { wishlistItems, removeFromWishlist } = useWishlistStore();
     const { addToCart } = useCartStore();
 
-    const handleAddToCart = (item: any) => {
+    const handleAddToCart = (item: WishlistItem) => {
         addToCart({
             product: item._id,
             name: item.name,

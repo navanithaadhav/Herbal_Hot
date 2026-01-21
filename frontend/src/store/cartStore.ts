@@ -10,18 +10,20 @@ export interface CartItem {
     countInStock: number;
 }
 
+export interface ShippingAddress {
+    address: string;
+    city: string;
+    postalCode: string;
+    country: string;
+}
+
 interface CartState {
     cartItems: CartItem[];
-    shippingAddress: {
-        address: string;
-        city: string;
-        postalCode: string;
-        country: string;
-    };
+    shippingAddress: ShippingAddress;
     paymentMethod: string;
     addToCart: (item: CartItem) => void;
     removeFromCart: (id: string) => void;
-    saveShippingAddress: (data: any) => void;
+    saveShippingAddress: (data: ShippingAddress) => void;
     savePaymentMethod: (data: string) => void;
     clearCart: () => void;
 }

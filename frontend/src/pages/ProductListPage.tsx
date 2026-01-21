@@ -45,7 +45,7 @@ const ProductListPage: React.FC = () => {
                 const { data } = await api.get(url);
                 setProducts(data);
                 setLoading(false);
-            } catch (err) {
+            } catch (_err) {
                 setError('Failed to fetch products');
                 setLoading(false);
             }

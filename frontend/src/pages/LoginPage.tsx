@@ -33,6 +33,7 @@ const LoginPage: React.FC = () => {
             setCredentials(data);
             toast.success('Welcome back!');
             navigate(redirect);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || 'Invalid email or password');
         } finally {
@@ -40,6 +41,7 @@ const LoginPage: React.FC = () => {
         }
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleGoogleLogin = async (credentialResponse: any) => {
         try {
             setLoading(true);
@@ -49,6 +51,7 @@ const LoginPage: React.FC = () => {
             setCredentials(data);
             toast.success('Welcome back!');
             navigate(redirect);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.error(err);
             toast.error('Google Loign Failed');
