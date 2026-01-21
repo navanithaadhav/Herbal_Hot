@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
+import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import { Loader2, Mail, ArrowRight, ArrowLeft } from 'lucide-react';
 import heroBg from '../assets/images/background.jpg';
@@ -19,10 +20,9 @@ const ForgotPasswordPage: React.FC = () => {
             navigate(`/reset-password?email=${encodeURIComponent(email)}`);
         } catch (error: unknown) {
             let errorMessage = 'Failed to send OTP';
-            if (typeof error === 'object' && error !== null && 'response' in error) {
-                const err = error as { response?: { data?: { message?: string } } };
-                if (err.response?.data?.message) {
-                    errorMessage = err.response.data.message;
+            if (isAxiosError(error)) {
+                if (error.response?.data?.message) {
+                    errorMessage = error.response.data.message;
                 }
             } else if (error instanceof Error) {
                 errorMessage = error.message;
