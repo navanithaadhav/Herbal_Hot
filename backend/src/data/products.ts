@@ -1,0 +1,108 @@
+const products = [
+    {
+        name: 'Black Peppercorns (Kali Mirch)',
+        image: '/images/photo2.webp',
+        description:
+            'Premium quality organic black peppercorns sourced from the Malabar coast. Known for their bold, pungent flavor and heating quality. Perfect for freshly grinding into curries, marinades, and salads.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 450,
+        countInStock: 50,
+        rating: 4.8,
+        numReviews: 12,
+        weight: '100g',
+    },
+    {
+        name: 'Dried Ginger (Sonth)',
+        image: '/images/photo3.webp',
+        description:
+            'Hand-picked and sun-dried ginger root with a zesty, aromatic flavor. Essential for tea masalas, baking, and digestive remedies. Free from sulphur and bleaching agents.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 250,
+        countInStock: 35,
+        rating: 4.5,
+        numReviews: 8,
+        weight: '100g',
+    },
+    {
+        name: 'Whole Cloves (Laung)',
+        image: '/images/photo4.webp',
+        description:
+            'Aromatic flower buds with a sweet and spicy flavor. Rich in antioxidants and essential oil. Use in biryanis, curries, and warm beverages for a distinct aroma.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 600,
+        countInStock: 20,
+        rating: 4.9,
+        numReviews: 15,
+        weight: '100g',
+    },
+    {
+        name: 'Cinnamon Sticks (Dalchini)',
+        image: '/images/photo5.webp',
+        description:
+            'Authentic Ceylon cinnamon sticks with a delicate, sweet flavor and warm aroma. Perfect for deserts, teas, and savory rice dishes. Helps regulate blood sugar levels.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 350,
+        countInStock: 40,
+        rating: 4.6,
+        numReviews: 10,
+        weight: '50g',
+    },
+    {
+        name: 'Green Cardamom (Elaichi)',
+        image: '/images/photo6.webp',
+        description:
+            'The Queen of Spices. Our bold green cardamom pods are filled with aromatic seeds. Adds a sweet-floral flavor to sweets, teas, and savory dishes.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 1200,
+        countInStock: 15,
+        rating: 5.0,
+        numReviews: 25,
+        weight: '50g',
+    },
+    {
+        name: 'Star Anise (Chakra Phool)',
+        image: '/images/photo7.webp',
+        description:
+            'Beautiful star-shaped spice with a strong licorice flavor. a key ingredient in Garam Masala and Chinese Five Spice. Adds depth to slow-cooked meat dishes and broths.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 550,
+        countInStock: 25,
+        rating: 4.7,
+        numReviews: 7,
+        weight: '50g',
+    },
+    {
+        name: 'Kashmiri Chili (Lal Mirch)',
+        image: '/images/photo8.webp',
+        description:
+            'Vibrant red color with mild heat. Our Kashmiri chili powder is perfect for adding a rich color to your tandoori dishes and curries without making them too spicy.',
+        brand: 'Herbal Hot',
+        category: 'Spices',
+        price: 280,
+        countInStock: 60,
+        rating: 4.4,
+        numReviews: 18,
+        weight: '200g',
+    },
+    {
+        name: 'Premium Saffron (Kesar)',
+        image: '/images/photo1.avif',
+        description:
+            'The world\'s most precious spice. Our saffron strands are deep red, indicating high potency and purity. Sourced from Kashmir, perfect for sweets and biryanis.',
+        brand: 'Herbal Hot',
+        category: 'Luxury Spices',
+        price: 5000,
+        countInStock: 5,
+        rating: 5.0,
+        numReviews: 30,
+        weight: '1g',
+    },
+];
+
+export default products;
