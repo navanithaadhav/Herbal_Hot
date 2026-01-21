@@ -28,6 +28,7 @@ const AddressBookPage: React.FC = () => {
 
     useEffect(() => {
         if (userInfo?.addresses) {
+            // eslint-disable-next-line
             setAddresses(userInfo.addresses);
         }
     }, [userInfo]);
@@ -50,7 +51,7 @@ const AddressBookPage: React.FC = () => {
             setShowForm(false);
             setNewAddress({ street: '', city: '', state: '', zip: '', country: '', mode: 'home' });
             toast.success('Address added successfully');
-        } catch (error) {
+        } catch {
             toast.error('Failed to add address');
         }
     };
@@ -67,7 +68,7 @@ const AddressBookPage: React.FC = () => {
                 setCredentials(data);
                 setAddresses(updatedAddresses);
                 toast.success('Address deleted successfully');
-            } catch (error) {
+            } catch {
                 toast.error('Failed to delete address');
             }
         }

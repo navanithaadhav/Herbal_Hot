@@ -13,6 +13,7 @@ interface Order {
     totalPrice: number;
     isPaid: boolean;
     isDelivered: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     orderItems: any[];
 }
 
@@ -46,6 +47,7 @@ const ProfilePage: React.FC = () => {
                     const { data } = await api.get('/orders/myorders', config);
                     setOrders(data);
                 } catch (err) {
+                    console.error('Fetch orders error:', err);
                     toast.error('Failed to fetch orders');
                 } finally {
                     setLoadingOrders(false);

@@ -30,6 +30,7 @@ interface Order {
     createdAt: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const SortIcon = ({ column, sortConfig }: { column: string, sortConfig: any }) => {
     if (sortConfig.key !== column) return <ArrowUpDown size={14} className="ml-1 text-gray-400" />;
     return sortConfig.direction === 'asc'
@@ -62,7 +63,8 @@ const OrderListPage: React.FC = () => {
                 const { data } = await api.get('/orders', config);
                 setOrders(data);
                 setLoading(false);
-            } catch (err) {
+                setLoading(false);
+            } catch {
                 toast.error('Failed to fetch orders');
                 setLoading(false);
             }

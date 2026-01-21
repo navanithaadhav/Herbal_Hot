@@ -43,7 +43,7 @@ const OrdersPage: React.FC = () => {
                 };
                 const { data } = await api.get('/orders/myorders', config);
                 setOrders(data);
-            } catch (_err) {
+            } catch {
                 toast.error('Failed to load orders');
             } finally {
                 setLoading(false);

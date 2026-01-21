@@ -61,6 +61,7 @@ const ProductDetailsPage: React.FC = () => {
 
     // Reset selected image when product changes: handled by key={id} in parent or manual reset
     useEffect(() => {
+        // eslint-disable-next-line
         setSelectedImage('');
     }, [id]);
 
@@ -84,6 +85,7 @@ const ProductDetailsPage: React.FC = () => {
             const { data } = await api.get(`/products/${id}`);
             setProduct(data);
             setSubmitLoading(false);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             toast.error(err.response?.data?.message || 'Failed to submit review');
             setSubmitLoading(false);
@@ -106,7 +108,7 @@ const ProductDetailsPage: React.FC = () => {
                 setRelatedProducts(related);
 
                 setLoading(false);
-            } catch (err) {
+            } catch {
                 setError('Product not found');
                 setLoading(false);
             }

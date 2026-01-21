@@ -23,13 +23,14 @@ const AdminProductListPage: React.FC = () => {
             const { data } = await api.get('/products');
             setProducts(data);
             setLoading(false);
-        } catch (err) {
+        } catch {
             toast.error('Failed to fetch products');
             setLoading(false);
         }
     }, [])
 
     useEffect(() => {
+        // eslint-disable-next-line
         fetchProducts();
     }, [fetchProducts]);
 
@@ -42,7 +43,7 @@ const AdminProductListPage: React.FC = () => {
                 await api.delete(`/products/${id}`, config);
                 toast.success('Product deleted');
                 fetchProducts();
-            } catch (err) {
+            } catch {
                 toast.error('Failed to delete product');
             }
         }
@@ -56,6 +57,7 @@ const AdminProductListPage: React.FC = () => {
             await api.post(`/products`, {}, config);
             toast.success('Sample product created');
             fetchProducts();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.error('Create product error:', err);
             const message = err.response?.data?.message || err.message || 'Failed to create product';

@@ -65,7 +65,7 @@ const ProductEditPage: React.FC = () => {
                 setCountInStock(data.countInStock);
                 setDescription(data.description);
                 setLoading(false);
-            } catch (err) {
+            } catch {
                 toast.error('Failed to fetch product details');
                 setLoading(false);
             }

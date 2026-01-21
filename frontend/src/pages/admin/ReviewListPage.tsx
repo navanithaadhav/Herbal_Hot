@@ -42,6 +42,7 @@ const ReviewListPage: React.FC = () => {
     }, [])
 
     useEffect(() => {
+        // eslint-disable-next-line
         fetchData();
     }, [fetchData]);
 

@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
                 const { data } = await api.get('/products');
                 setProducts(data);
                 setLoading(false);
-            } catch (err) {
+            } catch {
                 setError('Failed to load products');
                 setLoading(false);
             }
