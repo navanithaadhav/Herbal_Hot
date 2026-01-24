@@ -22,6 +22,7 @@ interface Order {
         city: string;
         postalCode: string;
         country: string;
+        mobileNumber: string;
     };
     paymentMethod: string;
     itemsPrice: number;
@@ -201,6 +202,7 @@ const OrderDetailsPage: React.FC = () => {
                                 <p>{order.shippingAddress.address}</p>
                                 <p>{order.shippingAddress.city} - {order.shippingAddress.postalCode}</p>
                                 <p>{order.shippingAddress.country}</p>
+                                <p className="mt-1"><span className="font-medium">Mobile:</span> {order.shippingAddress.mobileNumber}</p>
                             </div>
                             <div className="mt-4 pt-4 border-t border-gray-100">
                                 <span className={`inline-flex items-center text-xs font-medium px-2 py-1 rounded-full ${order.isDelivered ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>

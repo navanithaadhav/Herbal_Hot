@@ -150,6 +150,8 @@ const PlaceOrderPage: React.FC = () => {
                             <strong>Address: </strong>
                             {cart.shippingAddress.address}, {cart.shippingAddress.city},{' '}
                             {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
+                            <br />
+                            <strong>Mobile: </strong> {cart.shippingAddress.mobileNumber}
                         </p>
                     </div>
 
