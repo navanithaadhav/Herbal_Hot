@@ -17,6 +17,7 @@ export interface IUser extends Document {
         state: string;
         zip: string;
         country: string;
+        mobileNumber?: string;
     };
     addresses?: {
         street: string;
@@ -25,6 +26,7 @@ export interface IUser extends Document {
         zip: string;
         country: string;
         mode?: string;
+        mobileNumber?: string;
     }[];
     matchPassword(enteredPassword: string): Promise<boolean>;
 }
@@ -46,6 +48,7 @@ const userSchema = new Schema<IUser>(
             state: { type: String },
             zip: { type: String },
             country: { type: String },
+            mobileNumber: { type: String },
         },
         addresses: [
             {
@@ -55,6 +58,7 @@ const userSchema = new Schema<IUser>(
                 zip: { type: String },
                 country: { type: String },
                 mode: { type: String }, // 'home' or 'work'
+                mobileNumber: { type: String },
             }
         ],
     },

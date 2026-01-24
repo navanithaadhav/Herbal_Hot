@@ -15,6 +15,7 @@ export interface ShippingAddress {
     city: string;
     postalCode: string;
     country: string;
+    mobileNumber: string;
 }
 
 interface CartState {
@@ -32,7 +33,7 @@ export const useCartStore = create<CartState>()(
     persist(
         (set, get) => ({
             cartItems: [],
-            shippingAddress: { address: '', city: '', postalCode: '', country: '' },
+            shippingAddress: { address: '', city: '', postalCode: '', country: '', mobileNumber: '' },
             paymentMethod: 'PayPal',
             addToCart: (item) => {
                 console.log('Adding to cart:', item);

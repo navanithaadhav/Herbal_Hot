@@ -13,6 +13,7 @@ interface UserInfo {
         zip: string;
         country: string;
         mode?: string;
+        mobileNumber?: string;
     }[];
     token: string;
 }

@@ -11,6 +11,7 @@ interface Address {
     zip: string;
     country: string;
     mode?: string;
+    mobileNumber?: string;
 }
 
 const AddressBookPage: React.FC = () => {
@@ -24,15 +25,27 @@ const AddressBookPage: React.FC = () => {
         state: '',
         zip: '',
         country: '',
-        mode: 'home'
+        mode: 'home',
+        mobileNumber: ''
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setNewAddress({ ...newAddress, [e.target.name]: e.target.value });
     };
 
+    const validateMobileNumber = (number: string) => {
+        const phoneRegex = /^[0-9]{10,15}$/;
+        return phoneRegex.test(number);
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (newAddress.mobileNumber && !validateMobileNumber(newAddress.mobileNumber)) {
+            toast.error('Please enter a valid mobile number (10-15 digits)');
+            return;
+        }
+
         try {
             const updatedAddresses = [...addresses, newAddress];
             const { data } = await api.put('/users/profile', {
@@ -42,7 +55,7 @@ const AddressBookPage: React.FC = () => {
             });
             setCredentials(data);
             setShowForm(false);
-            setNewAddress({ street: '', city: '', state: '', zip: '', country: '', mode: 'home' });
+            setNewAddress({ street: '', city: '', state: '', zip: '', country: '', mode: 'home', mobileNumber: '' });
             toast.success('Address added successfully');
         } catch {
             toast.error('Failed to add address');
@@ -83,6 +96,19 @@ const AddressBookPage: React.FC = () => {
                 <div className="bg-white p-6 rounded-lg shadow-md mb-8 border border-gray-100">
                     <h2 className="text-xl font-semibold mb-4">Add New Address</h2>
                     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                            <input
+                                type="tel"
+                                name="mobileNumber"
+                                value={newAddress.mobileNumber}
+                                onChange={handleInputChange}
+                                required
+                                placeholder="Enter mobile number"
+                                className="w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">Used for order tracking and delivery updates.</p>
+                        </div>
                         <div className="col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
                             <input
@@ -188,6 +214,7 @@ const AddressBookPage: React.FC = () => {
                             </button>
                         </div>
                         <div className="space-y-1 text-gray-600">
+                            {addr.mobileNumber && <p className="text-sm text-gray-500 font-medium">{addr.mobileNumber}</p>}
                             <p>{addr.street}</p>
                             <p>{addr.city}, {addr.state} {addr.zip}</p>
                             <p>{addr.country}</p>

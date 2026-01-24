@@ -15,8 +15,10 @@ const ShippingPage: React.FC = () => {
     const [city, setCity] = useState(shippingAddress.city || '');
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '');
     const [country, setCountry] = useState(shippingAddress.country || '');
+    const [mobileNumber, setMobileNumber] = useState(shippingAddress.mobileNumber || '');
 
     const [selectedAddressIndex, setSelectedAddressIndex] = useState<number | string>('new');
+    const [error, setError] = useState('');
 
     const handleAddressSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const index = e.target.value;
@@ -28,17 +30,30 @@ const ShippingPage: React.FC = () => {
             setCity(selected.city);
             setPostalCode(selected.zip);
             setCountry(selected.country);
+            setMobileNumber(selected.mobileNumber || '');
         } else {
             setAddress('');
             setCity('');
             setPostalCode('');
             setCountry('');
+            setMobileNumber('');
         }
+    };
+
+    const validateMobileNumber = (number: string) => {
+        const phoneRegex = /^[0-9]{10,15}$/;
+        return phoneRegex.test(number);
     };
 
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault();
-        cart.saveShippingAddress({ address, city, postalCode, country });
+
+        if (!validateMobileNumber(mobileNumber)) {
+            setError('Please enter a valid mobile number (10-15 digits)');
+            return;
+        }
+
+        cart.saveShippingAddress({ address, city, postalCode, country, mobileNumber });
         navigate('/payment');
     };
 
@@ -47,6 +62,12 @@ const ShippingPage: React.FC = () => {
             <CheckoutSteps step1 step2 />
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 md:p-8">
                 <h1 className="text-2xl font-bold text-gray-900 mb-6">Shipping Address</h1>
+
+                {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span className="block sm:inline">{error}</span>
+                    </div>
+                )}
 
                 {userInfo?.addresses && userInfo.addresses.length > 0 && (
                     <div className="mb-6 bg-gray-50 p-4 rounded-lg border border-gray-100">
@@ -67,6 +88,22 @@ const ShippingPage: React.FC = () => {
                 )}
 
                 <form onSubmit={submitHandler} className="space-y-6">
+                    <div>
+                        <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                        <input
+                            type="tel"
+                            id="mobileNumber"
+                            placeholder="Enter mobile number"
+                            value={mobileNumber}
+                            onChange={(e) => {
+                                setMobileNumber(e.target.value);
+                                setError('');
+                            }}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 outline-none"
+                        />
+                        <p className="text-xs text-gray-500 mt-1">Used for order tracking and delivery updates.</p>
+                    </div>
                     <div>
                         <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address</label>
                         <input
