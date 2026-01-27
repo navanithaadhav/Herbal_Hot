@@ -48,6 +48,11 @@ const ShippingPage: React.FC = () => {
     const submitHandler = (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!mobileNumber) {
+            setError('Enter your number');
+            return;
+        }
+
         if (!validateMobileNumber(mobileNumber)) {
             setError('Please enter a valid mobile number (10-15 digits)');
             return;
@@ -99,7 +104,6 @@ const ShippingPage: React.FC = () => {
                                 setMobileNumber(e.target.value);
                                 setError('');
                             }}
-                            required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500 outline-none"
                         />
                         <p className="text-xs text-gray-500 mt-1">Used for order tracking and delivery updates.</p>

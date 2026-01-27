@@ -41,6 +41,11 @@ const AddressBookPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!newAddress.mobileNumber) {
+            toast.error('Enter your number');
+            return;
+        }
+
         if (newAddress.mobileNumber && !validateMobileNumber(newAddress.mobileNumber)) {
             toast.error('Please enter a valid mobile number (10-15 digits)');
             return;
@@ -103,7 +108,6 @@ const AddressBookPage: React.FC = () => {
                                 name="mobileNumber"
                                 value={newAddress.mobileNumber}
                                 onChange={handleInputChange}
-                                required
                                 placeholder="Enter mobile number"
                                 className="w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500"
                             />
