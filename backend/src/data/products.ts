@@ -3,7 +3,7 @@ const products = [
         name: 'Black Peppercorns (Kali Mirch)',
         image: '/images/photo2.webp',
         description:
-            'Premium quality organic black peppercorns sourced from the Malabar coast. Known for their bold, pungent flavor and heating quality. Perfect for freshly grinding into curries, marinades, and salads.',
+            'Premium quality organic black peppercorns sourced from the Malabar Coast. Known for their bold, pungent flavor and heating quality. Perfect for freshly grinding into curries, marinades, and salads.',
         brand: 'Herbal Hot',
         category: 'Spices',
         price: 450,
@@ -42,7 +42,7 @@ const products = [
         name: 'Cinnamon Sticks (Dalchini)',
         image: '/images/photo5.webp',
         description:
-            'Authentic Ceylon cinnamon sticks with a delicate, sweet flavor and warm aroma. Perfect for deserts, teas, and savory rice dishes. Helps regulate blood sugar levels.',
+            'Authentic Ceylon cinnamon sticks with a delicate, sweet flavor and warm aroma. Perfect for desserts, teas, and savory rice dishes. Helps regulate blood sugar levels.',
         brand: 'Herbal Hot',
         category: 'Spices',
         price: 350,
@@ -55,7 +55,7 @@ const products = [
         name: 'Green Cardamom (Elaichi)',
         image: '/images/photo6.webp',
         description:
-            'The Queen of Spices. Our bold green cardamom pods are filled with aromatic seeds. Adds a sweet-floral flavor to sweets, teas, and savory dishes.',
+            'The Queen of Spices. Our bold green cardamom pods are filled with aromatic seeds. Adds a sweet, floral flavor to sweets, teas, and savory dishes.',
         brand: 'Herbal Hot',
         category: 'Spices',
         price: 1200,
@@ -68,7 +68,7 @@ const products = [
         name: 'Star Anise (Chakra Phool)',
         image: '/images/photo7.webp',
         description:
-            'Beautiful star-shaped spice with a strong licorice flavor. a key ingredient in Garam Masala and Chinese Five Spice. Adds depth to slow-cooked meat dishes and broths.',
+            'Beautiful star-shaped spice with a strong liquorice flavor. A key ingredient in Garam Masala and Chinese Five Spice. Adds depth to slow-cooked meat dishes and broths.',
         brand: 'Herbal Hot',
         category: 'Spices',
         price: 550,
@@ -78,10 +78,10 @@ const products = [
         weight: '50g',
     },
     {
-        name: 'Kashmiri Chili (Lal Mirch)',
+        name: 'Kashmiri Chilli (Lal Mirch)',
         image: '/images/photo8.webp',
         description:
-            'Vibrant red color with mild heat. Our Kashmiri chili powder is perfect for adding a rich color to your tandoori dishes and curries without making them too spicy.',
+            'Vibrant red color with mild heat. Our Kashmiri chilli powder is perfect for adding a rich color to your tandoori dishes and curries without making them too spicy.',
         brand: 'Herbal Hot',
         category: 'Spices',
         price: 280,
@@ -94,7 +94,7 @@ const products = [
         name: 'Premium Saffron (Kesar)',
         image: '/images/photo1.avif',
         description:
-            'The world\'s most precious spice. Our saffron strands are deep red, indicating high potency and purity. Sourced from Kashmir, perfect for sweets and biryanis.',
+            "The world's most precious spice. Our saffron strands are deep red, indicating high potency and purity. Sourced from Kashmir, perfect for sweets and biryanis.",
         brand: 'Herbal Hot',
         category: 'Luxury Spices',
         price: 5000,
