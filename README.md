@@ -1,71 +1,46 @@
-# Herbal_Hot E-Commerce Project Documentation
+# Herbal Hot
 
-## Project Overview
-Herbal_Hot is an e-commerce platform designed specifically for selling herbal products. The application allows users to browse through various herbal items, place orders online, and manage their accounts.
+## Docker Deployment
 
-## Tech Stack
-- **Frontend:** React.js
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Authentication:** JWT (JSON Web Tokens)
+To deploy the application using Docker, follow these steps:
 
-## Features
-- User registration and authentication
-- Product listing with filtering options
-- Shopping cart functionality
-- Order management system
-- User profile management
+1. Ensure you have Docker installed on your machine.
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/navanithaadhav/Herbal_Hot.git
+   cd Herbal_Hot
+   ```
+3. Build the Docker image:
+   ```bash
+   docker build -t herbal-hot .
+   ```
+4. Run the Docker container:
+   ```bash
+   docker run -d -p 5000:5000 herbal-hot
+   ```
 
-## Project Structure
-- **/client:** Contains the frontend application using React.js
-- **/server:** Contains the backend application using Node.js
-- **/models:** Database schema definitions
-- **/routes:** API route handlers
-- **/controllers:** Business logic for handling requests
+## Detailed API Documentation
 
-## Setup Instructions
-1. Clone the repository:  
-   `git clone https://github.com/navanithaadhav/Herbal_Hot.git`
-2. Navigate to the server directory:  
-   `cd Herbal_Hot/server`
-3. Install dependencies:  
-   `npm install`
-4. Set up environment variables for database connection and JWT keys.
-5. Start the server:  
-   `npm run start`
-6. Navigate to the client directory:  
-   `cd ../client`
-7. Install frontend dependencies:  
-   `npm install`
-8. Start the frontend app:  
-   `npm start`
+### User API
+- **POST /api/users**: Create a new user.
+- **GET /api/users/{id}**: Retrieve user details.
+- **PUT /api/users/{id}**: Update user details.
 
-## Environment Variables
-- **MONGO_URI:** MongoDB connection string  
-- **JWT_SECRET:** Secret key for signing JWT tokens  
-- **PORT:** Port number on which the server will run (default: 5000)
+### Product API
+- **GET /api/products**: Get a list of products.
+- **POST /api/products**: Add a new product.
 
-## Running the Application
-1. Ensure your MongoDB server is running.
-2. Run the backend server and then the frontend application.
-3. Access the application at `http://localhost:3000`.
+### Order API
+- **POST /api/orders**: Place a new order.
+- **GET /api/orders/{id}**: Get order details.
 
-## API Documentation Outline
-- **Authentication API:**  
-  - POST `/api/auth/register`: User registration  
-  - POST `/api/auth/login`: User login  
+## Troubleshooting/FAQ
 
-- **Product API:**  
-  - GET `/api/products`: Get a list of products  
-  - POST `/api/products`: Add a new product (Admin only) 
+### Q1: What to do if the application fails to start?
+**A:** Ensure that all environment variables are set correctly and that you have the necessary permissions to run Docker.
 
-- **Order API:**  
-  - GET `/api/orders`: Get user orders  
-  - POST `/api/orders`: Create a new order
+### Q2: How to reset the database?
+**A:** You can reset the database by running the migration commands in your setup.
 
-## Contributing Guidelines
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Make your changes and commit them (`git commit -m 'Add a new feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a pull request.
+### Q3: Why am I getting a CORS error?
+**A:** Ensure that your API allows requests from your frontend origin.
