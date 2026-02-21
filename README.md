@@ -1,46 +1,67 @@
 # Herbal Hot
 
-## Docker Deployment
+## Project Overview
+Herbal Hot is an innovative solution aimed at promoting wellness through herbal remedies. Our platform provides users with access to a variety of herbal products along with detailed information and usage guidelines.
 
-To deploy the application using Docker, follow these steps:
+## Tech Stack
+- **Frontend**: React.js
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Containerization**: Docker
+- **Deployment**: Heroku
 
-1. Ensure you have Docker installed on your machine.
-2. Clone the repository:
+## Features
+- User authentication
+- Browse and search herbal products
+- Detailed product descriptions and user guides
+- User reviews and ratings
+- Admin panel for product management
+
+## Setup Instructions
+1. Clone the repository:
    ```bash
    git clone https://github.com/navanithaadhav/Herbal_Hot.git
    cd Herbal_Hot
    ```
-3. Build the Docker image:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   Create a `.env` file in the root of the project:
+   ```bash
+   PORT=5000
+   MONGODB_URI=your_mongodb_uri
+   JWT_SECRET=your_jwt_secret
+   ```
+4. Run the application:
+   ```bash
+   npm start
+   ```
+
+## Docker Deployment
+To deploy the Herbal Hot application using Docker, follow these steps:
+1. Build the Docker image:
    ```bash
    docker build -t herbal-hot .
    ```
-4. Run the Docker container:
+2. Run the Docker container:
    ```bash
-   docker run -d -p 5000:5000 herbal-hot
+   docker run -p 5000:5000 herbal-hot
    ```
+   The application will be accessible at `http://localhost:5000`.
 
 ## Detailed API Documentation
+- **GET /api/products**: Retrieve all herbal products.
+- **GET /api/products/:id**: Retrieve a specific product by ID.
+- **POST /api/products**: Add a new product (Admin only).
+- **PUT /api/products/:id**: Update a product (Admin only).
+- **DELETE /api/products/:id**: Delete a product (Admin only).
 
-### User API
-- **POST /api/users**: Create a new user.
-- **GET /api/users/{id}**: Retrieve user details.
-- **PUT /api/users/{id}**: Update user details.
+## Troubleshooting
+- If the application does not start, ensure all dependencies are installed and environment variables are correctly set.
+- Check your MongoDB connection string and permissions.
+- For any issues related to API calls, use tools like Postman to test endpoints and inspect responses.
 
-### Product API
-- **GET /api/products**: Get a list of products.
-- **POST /api/products**: Add a new product.
-
-### Order API
-- **POST /api/orders**: Place a new order.
-- **GET /api/orders/{id}**: Get order details.
-
-## Troubleshooting/FAQ
-
-### Q1: What to do if the application fails to start?
-**A:** Ensure that all environment variables are set correctly and that you have the necessary permissions to run Docker.
-
-### Q2: How to reset the database?
-**A:** You can reset the database by running the migration commands in your setup.
-
-### Q3: Why am I getting a CORS error?
-**A:** Ensure that your API allows requests from your frontend origin.
+## License
+This project is licensed under the MIT License.
