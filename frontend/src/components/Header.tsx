@@ -168,19 +168,19 @@ const Header: React.FC = () => {
             {isMenuOpen && (
                 <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-t border-gray-100 shadow-lg z-40">
                     <div className="px-4 pt-2 pb-6 space-y-1">
-                        <Link to="/" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Home</Link>
-                        <Link to="/products" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Shop</Link>
-                        <Link to="/categories" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Categories</Link>
-                        <Link to="/about" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">About Us</Link>
-                        <Link to="/contact" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Contact</Link>
+                        <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Home</Link>
+                        <Link to="/products" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Shop</Link>
+                        <Link to="/categories" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Categories</Link>
+                        <Link to="/about" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">About Us</Link>
+                        <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Contact</Link>
                         <div className="border-t border-gray-100 my-2"></div>
                         {!userInfo && (
-                            <Link to="/login" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Login / Register</Link>
+                            <Link to="/login" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">Login / Register</Link>
                         )}
                         {userInfo && (
                             <>
-                                <Link to="/profile" className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">My Profile</Link>
-                                <button onClick={handleLogout} className="block w-full text-left px-3 py-3 rounded-lg text-base font-medium text-red-600 hover:bg-red-50">Logout</button>
+                                <Link to="/profile" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-yellow-600">My Profile</Link>
+                                <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="block w-full text-left px-3 py-3 rounded-lg text-base font-medium text-red-600 hover:bg-red-50">Logout</button>
                             </>
                         )}
                     </div>
