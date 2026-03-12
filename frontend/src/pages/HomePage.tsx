@@ -180,24 +180,24 @@ const HomePage: React.FC = () => {
             </section>
 
             {/* Best Products Section */}
-            <section className="py-20 bg-white">
+            <section className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 relative inline-block">
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 relative inline-block">
                             Best Products
-                            <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform translate-y-3"></span>
+                            <span className="absolute -bottom-2 left-0 w-1/2 h-1.5 bg-yellow-500 rounded-full"></span>
                         </h2>
-                        <p className="text-gray-500 mt-6 max-w-2xl mx-auto">
+                        <p className="text-gray-500 mt-8 max-w-2xl mx-auto text-lg">
                             Hand-picked premium spices for your everyday cooking needs.
                         </p>
 
-                        <div className="flex justify-center gap-4 mt-8">
-                            <button className="px-6 py-2 bg-yellow-500 text-white rounded-full font-medium shadow-md">New Trends</button>
-                            <button className="px-6 py-2 bg-white border border-gray-300 text-gray-600 rounded-full font-medium hover:bg-gray-50">Spicy Masalas</button>
+                        <div className="flex justify-center gap-6 mt-10">
+                            <button className="px-8 py-2.5 bg-yellow-500 text-white rounded-full font-bold shadow-lg hover:bg-yellow-600 transition-all hover:scale-105">New Trends</button>
+                            <button className="px-8 py-2.5 bg-white border-2 border-gray-200 text-gray-700 rounded-full font-bold hover:border-yellow-500 hover:text-yellow-600 transition-all hover:scale-105">Spicy Masalas</button>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-10 gap-y-12 md:gap-y-16">
                         {products.map((product) => (
                             <div
                                 key={product._id}
@@ -205,52 +205,55 @@ const HomePage: React.FC = () => {
                                 onClick={() => navigate(`/products/${product._id}`)}
                             >
                                 {/* Circular Image Container */}
-                                <div className="relative mx-auto w-58 h-58 mb-6">
-                                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-gray-100 shadow-lg group-hover:border-gray-200 transition-all duration-300 bg-gray-100 aspect-square">
+                                <div className="relative mx-auto w-40 h-40 sm:w-48 sm:h-48 md:w-60 md:h-60 mb-6 md:mb-8">
+                                    <div className="w-full h-full rounded-full overflow-hidden border-4 md:border-8 border-gray-50 shadow-xl group-hover:border-yellow-50 overflow-hidden transition-all duration-500 aspect-square">
                                         <img
                                             src={product.image}
-                                            alt=""
+                                            alt={product.name}
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;
-                                                target.src = 'https://placehold.co/400x400/e2e8f0/1e293b?text=Spice+Image';
+                                                target.src = 'https://placehold.co/600x600/f8fafc/64748b?text=' + encodeURIComponent(product.name);
                                             }}
-                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         />
                                     </div>
-                                    {/* Quick Actions Hover */}
-                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2 z-10">
-                                        <button
-                                            onClick={(e) => handleAddToCart(e, product)}
-                                            className="p-2 bg-white text-gray-800 rounded-full shadow hover:bg-yellow-500 hover:text-white transition-colors"
-                                            title="Add to Cart"
-                                            aria-label="Add to Cart"
-                                        >
-                                            <ShoppingCart size={18} />
-                                        </button>
-                                        <button
-                                            onClick={(e) => handleWishlistToggle(e, product)}
-                                            className={`p-2 rounded-full shadow transition-colors ${isInWishlist(product._id)
-                                                ? 'bg-red-500 text-white hover:bg-red-600'
-                                                : 'bg-white text-gray-800 hover:bg-red-500 hover:text-white'
-                                                }`}
-                                            title="Add to Wishlist"
-                                            aria-label="Add to Wishlist"
-                                        >
-                                            <Heart size={18} className={isInWishlist(product._id) ? 'fill-current' : ''} />
-                                        </button>
-                                        <button
-                                            onClick={(e) => handleViewProduct(e, product._id)}
-                                            className="p-2 bg-white text-gray-800 rounded-full shadow hover:bg-blue-500 hover:text-white transition-colors"
-                                            title="View Details"
-                                            aria-label="View Details"
-                                        >
-                                            <Eye size={18} />
-                                        </button>
+
+                                    {/* Quick Actions Hover Overlays - Hidden on touch devices or smaller screens to avoid clutter */}
+                                    <div className="absolute inset-0 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
+                                        <div className="flex gap-3 scale-90 group-hover:scale-100 transition-transform duration-300">
+                                            <button
+                                                onClick={(e) => handleAddToCart(e, product)}
+                                                className="p-3 bg-white text-gray-900 rounded-full shadow-2xl hover:bg-yellow-500 hover:text-white transition-all transform hover:-translate-y-1"
+                                                title="Add to Cart"
+                                            >
+                                                <ShoppingCart size={20} />
+                                            </button>
+                                            <button
+                                                onClick={(e) => handleWishlistToggle(e, product)}
+                                                className={`p-3 rounded-full shadow-2xl transition-all transform hover:-translate-y-1 ${isInWishlist(product._id)
+                                                    ? 'bg-red-500 text-white hover:bg-red-600'
+                                                    : 'bg-white text-gray-900 hover:bg-red-500 hover:text-white'
+                                                    }`}
+                                                title="Add to Wishlist"
+                                            >
+                                                <Heart size={20} className={isInWishlist(product._id) ? 'fill-current' : ''} />
+                                            </button>
+                                            <button
+                                                onClick={(e) => handleViewProduct(e, product._id)}
+                                                className="p-3 bg-white text-gray-900 rounded-full shadow-2xl hover:bg-zinc-800 hover:text-white transition-all transform hover:-translate-y-1"
+                                                title="View Details"
+                                            >
+                                                <Eye size={20} />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <h3 className="text-lg font-bold text-gray-800 group-hover:text-yellow-600 transition-colors">{product.name}</h3>
-                                <p className="text-yellow-600 font-bold mt-1 text-lg">₹{product.price}</p>
+                                <h3 className="text-sm md:text-xl font-bold text-gray-900 group-hover:text-yellow-600 transition-colors mb-1 md:mb-2 line-clamp-2 md:line-clamp-none px-2">{product.name}</h3>
+                                <div className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2">
+                                    <p className="text-yellow-600 font-black text-base md:text-xl italic">₹{product.price}</p>
+                                    <span className="text-gray-400 line-through text-xs md:text-sm">₹{Math.round(product.price * 1.2)}</span>
+                                </div>
                             </div>
                         ))}
                     </div>

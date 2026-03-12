@@ -13,50 +13,40 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # Backend Setup
-    - name: Setup Node.js for Backend
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
         cache: 'npm'
-        cache-dependency-path: backend/package-lock.json
+        cache-dependency-path: |
+          backend/package-lock.json
+          frontend/package-lock.json
 
+    # Backend Setup
     - name: Install Backend Dependencies
-      run: |
-        cd backend
-        npm ci
+      working-directory: ./backend
+      run: npm ci
 
     - name: Build Backend
-      run: |
-        cd backend
-        npm run build
+      working-directory: ./backend
+      run: npm run build
 
     # Frontend Setup
-    - name: Setup Node.js for Frontend
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
-        cache-dependency-path: frontend/package-lock.json
-
     - name: Install Frontend Dependencies
-      run: |
-        cd frontend
-        npm ci
+      working-directory: ./frontend
+      run: npm ci
 
     - name: Lint Frontend
-      run: |
-        cd frontend
-        npm run lint
+      working-directory: ./frontend
+      run: npm run lint
 
     - name: Build Frontend
-      run: |
-        cd frontend
-        npm run build
+      working-directory: ./frontend
+      run: npm run build
         
-    # Optional: Docker Build Test
+    # Docker Build Tests
     - name: Test Docker Build (Backend)
-      run: docker build ./backend
+      run: docker build -t herbal-hot-backend ./backend
 
     - name: Test Docker Build (Frontend)
-      run: docker build ./frontend
+      run: docker build -t herbal-hot-frontend ./frontend
