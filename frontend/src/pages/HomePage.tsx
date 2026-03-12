@@ -181,23 +181,23 @@ const HomePage: React.FC = () => {
 
             {/* Best Products Section */}
             <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 relative inline-block">
+                <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+                    <div className="text-center mb-20">
+                        <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 relative inline-block tracking-tighter">
                             Best Products
-                            <span className="absolute -bottom-2 left-0 w-1/2 h-1.5 bg-yellow-500 rounded-full"></span>
+                            <span className="absolute -bottom-2 left-0 w-1/2 h-2 bg-yellow-500 rounded-full"></span>
                         </h2>
-                        <p className="text-gray-500 mt-8 max-w-2xl mx-auto text-lg">
-                            Hand-picked premium spices for your everyday cooking needs.
+                        <p className="text-gray-500 mt-10 max-w-2xl mx-auto text-lg md:text-xl font-medium">
+                            Premium hand-picked spices, sourced directly from the finest exotic estates.
                         </p>
 
-                        <div className="flex justify-center gap-6 mt-10">
-                            <button className="px-8 py-2.5 bg-yellow-500 text-white rounded-full font-bold shadow-lg hover:bg-yellow-600 transition-all hover:scale-105">New Trends</button>
-                            <button className="px-8 py-2.5 bg-white border-2 border-gray-200 text-gray-700 rounded-full font-bold hover:border-yellow-500 hover:text-yellow-600 transition-all hover:scale-105">Spicy Masalas</button>
+                        <div className="flex justify-center gap-6 mt-12">
+                            <button className="px-10 py-3 bg-yellow-500 text-white rounded-full font-black shadow-xl hover:bg-yellow-600 transition-all hover:scale-105 active:scale-95">New Trends</button>
+                            <button className="px-10 py-3 bg-white border-2 border-gray-100 text-gray-800 rounded-full font-black hover:border-yellow-500 hover:text-yellow-600 transition-all hover:scale-105 active:scale-95 shadow-sm">Spicy Masalas</button>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-10 gap-y-12 md:gap-y-16">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 md:gap-x-12 gap-y-16 md:gap-y-24">
                         {products.map((product) => (
                             <div
                                 key={product._id}
@@ -205,8 +205,8 @@ const HomePage: React.FC = () => {
                                 onClick={() => navigate(`/products/${product._id}`)}
                             >
                                 {/* Circular Image Container */}
-                                <div className="relative mx-auto w-40 h-40 sm:w-48 sm:h-48 md:w-60 md:h-60 mb-6 md:mb-8">
-                                    <div className="w-full h-full rounded-full overflow-hidden border-4 md:border-8 border-gray-50 shadow-xl group-hover:border-yellow-50 overflow-hidden transition-all duration-500 aspect-square">
+                                <div className="relative mx-auto w-32 h-32 sm:w-44 sm:h-44 md:w-60 md:h-60 mb-6 md:mb-10">
+                                    <div className="w-full h-full rounded-full overflow-hidden border-4 md:border-8 border-gray-50 shadow-2xl group-hover:border-yellow-100 transition-all duration-700 aspect-square">
                                         <img
                                             src={product.image}
                                             alt={product.name}
